@@ -172,6 +172,9 @@ LRESULT CALLBACK ListViewProc1(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			nSelectItemIndex = -1;
 		}
 		break;
+	case WM_DESTROY:
+		nSelectItemIndex = -1;
+		break;
 	default:
 		break;
 	}
