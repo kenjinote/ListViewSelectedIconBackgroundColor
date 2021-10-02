@@ -137,6 +137,12 @@ LRESULT CALLBACK ListViewProc1(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 					lvi.state = LVIS_SELECTED;
 					ListView_SetItem(hWnd, &lvi);
 					nSelectItemIndex = lvhti.iItem;
+
+					TRACKMOUSEEVENT tme;
+					tme.cbSize = sizeof(tme);
+					tme.dwFlags = TME_LEAVE;
+					tme.hwndTrack = hWnd;
+					_TrackMouseEvent(&tme);
 				}
 			}
 			else
@@ -151,11 +157,6 @@ LRESULT CALLBACK ListViewProc1(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				}
 				nSelectItemIndex = -1;
 			}
-			TRACKMOUSEEVENT tme;
-			tme.cbSize = sizeof(tme);
-			tme.dwFlags = TME_LEAVE;
-			tme.hwndTrack = hWnd;
-			_TrackMouseEvent(&tme);
 		}
 		break;
 	case WM_MOUSELEAVE:
