@@ -234,16 +234,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 						return CDRF_NOTIFYITEMDRAW;
 					case CDDS_ITEMPREPAINT:
 						{
+							RECT rect;
+							ListView_GetItemRect(hList, lvcd->nmcd.dwItemSpec, &rect, LVIR_ICON);
 							if (ListView_GetItemState(hList, lvcd->nmcd.dwItemSpec, LVIS_SELECTED) == (LVIS_SELECTED))
 							{
-								RECT rect;
-								ListView_GetItemRect(hList, lvcd->nmcd.dwItemSpec, &rect, LVIR_ICON);
 								HBRUSH hBrush = CreateSolidBrush(RGB(153, 201, 239));
 								FillRect(lvcd->nmcd.hdc, &rect, hBrush);
 								DeleteObject(hBrush);
 							}
-							RECT rect;
-							ListView_GetItemRect(hList, lvcd->nmcd.dwItemSpec, &rect, LVIR_ICON);
 							ImageList_Draw(hImgList, 0, lvcd->nmcd.hdc, rect.left, rect.top, ILD_TRANSPARENT);
 						}
 						return CDRF_SKIPDEFAULT;
